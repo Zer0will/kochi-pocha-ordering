@@ -1,5 +1,8 @@
 {
   "cleanUrls": true,
+  "rewrites": [
+    {"source": "/order", "destination": "/order.html"}
+  ],
   "headers": [
     {
       "source": "/(.*)",

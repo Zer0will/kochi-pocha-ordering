@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#10121d" />
-  <title>Kochi Po-cha 코치포차 | Direct Pickup Preview</title>
-  <meta name="description" content="Order Korean pocha favorites for pickup from Kochi Po-cha in Lynnwood: fried chicken, bossam, soups, grilled plates, and late-night comfort food." />
-  <link rel="canonical" href="https://kochi-pocha-ordering.vercel.app/" />
+  <title>Order Online | Kochi Po-cha 코치포차</title>
+  <meta name="description" content="Order pickup directly from Kochi Po-cha in Lynnwood: fried chicken, bossam, soups, grilled plates, and Korean late-night comfort food." />
+  <link rel="canonical" href="https://kochi-pocha-ordering.vercel.app/order" />
   <meta property="og:title" content="Kochi Po-cha 코치포차 | Pickup Ordering" />
   <meta property="og:description" content="A lower-fee direct ordering preview for Kochi Po-cha in Lynnwood." />
   <meta property="og:type" content="website" />
@@ -20,16 +20,16 @@
 </head>
 <body>
   <header class="topbar">
-    <a class="brand-lockup" href="#top" aria-label="Kochi Po-cha home">
+    <a class="brand-lockup" href="/" aria-label="Kochi Po-cha home">
       <span class="logo-mark">코치</span>
       <span><b>KOCHI PO-CHA</b><small>코치포차 · Lynnwood</small></span>
     </a>
     <nav class="nav-links" aria-label="Primary navigation">
-      <a href="/order">Order</a>
+      <a href="/">Home</a>
+      <a href="#menu">Menu</a>
       <a href="#how">How pickup works</a>
-      <a href="#owner-note">Owner note</a>
     </nav>
-    <a class="cart-pill" href="/order">Order now <b>→</b></a>
+    <button class="cart-pill" id="cartTop" type="button">Cart <b id="cartCount">0</b></button>
   </header>
 
   <main id="top">
@@ -39,7 +39,7 @@
         <h1>Late-night pocha, <span>without the platform tax.</span></h1>
         <p class="lead">A Kochi-owned ordering flow for fried chicken, bossam, soups, grilled plates, and Korean late-night comfort food. Built to replace percentage-based marketplace ordering with a lower-fee direct system.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="/order">Start order</a>
+          <a class="btn primary" href="#menu">Jump to menu</a>
           <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Kochi%20Po-cha%2018623%20Hwy%2099%20%23140%20Lynnwood%20WA" target="_blank" rel="noreferrer">Get directions</a>
         </div>
       </div>
@@ -57,6 +57,36 @@
       <div><b>0%</b><span>Marketplace commission in the direct model</span></div>
       <div><b>2.9% + 30¢</b><span>Typical Stripe card processing baseline</span></div>
       <div><b>Owner-owned</b><span>Menu data stays in GitHub; orders can route to email/SMS/POS</span></div>
+    </section>
+
+    <section class="order-layout" id="menu">
+      <aside class="category-rail" id="categoryRail" aria-label="Menu categories"></aside>
+      <section class="menu-column">
+        <div class="menu-head">
+          <div>
+            <p class="eyebrow">Menu</p>
+            <h2>Order pickup</h2>
+          </div>
+          <label class="search-box">Search <input id="searchInput" type="search" placeholder="chicken, soup, bossam…" /></label>
+        </div>
+        <div id="menuContent"></div>
+      </section>
+      <aside class="cart-panel" id="cartPanel" aria-label="Cart">
+        <div class="cart-head"><div><h3>Your order</h3><p>Pickup · Kochi Po-cha</p></div><button id="closeCart" type="button" aria-label="Close cart">×</button></div>
+        <div id="cartItems" class="cart-items"></div>
+        <div id="emptyCart" class="empty-cart">Cart is empty.<br><span>맛있는 걸 골라보세요.</span></div>
+        <form class="checkout-form" id="checkoutForm">
+          <div class="summary"><span>Subtotal</span><b id="subtotal">$0.00</b></div>
+          <div class="summary"><span>Estimated tax</span><b id="tax">$0.00</b></div>
+          <div class="summary total"><span>Total</span><b id="total">$0.00</b></div>
+          <label>Name<input name="customerName" autocomplete="name" required placeholder="Your name" /></label>
+          <label>Phone<input name="customerPhone" autocomplete="tel" required placeholder="For pickup updates" /></label>
+          <label>Pickup note<textarea name="pickupNote" placeholder="ASAP, utensils, allergies, etc."></textarea></label>
+          <button class="checkout" id="checkoutBtn" type="submit" disabled>Place pickup order</button>
+          <p class="fine-print">Preview mode: orders are validated and logged by the Vercel API response only until email/SMS/POS credentials are added.</p>
+          <div id="orderStatus" role="status" aria-live="polite"></div>
+        </form>
+      </aside>
     </section>
 
     <section class="how" id="how">
@@ -79,7 +109,21 @@
     </section>
   </main>
 
+  <button class="mobile-cart" id="mobileCartBtn" type="button"><span><b id="mobileCount">0</b> items</span><strong id="mobileTotal">$0.00</strong></button>
+
+  <div class="modal" id="itemModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalName">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+      <p class="eyebrow" id="modalCategory"></p>
+      <h3 id="modalName"></h3>
+      <p id="modalDesc"></p>
+      <div class="modal-price" id="modalPrice"></div>
+      <label>Special instructions<textarea id="itemNotes" placeholder="No onions, extra sauce, allergies…"></textarea></label>
+      <div class="qty-row"><button id="qtyMinus" type="button">−</button><span id="qtyValue">1</span><button id="qtyPlus" type="button">+</button><button class="add-btn" id="addToCart" type="button">Add · <span id="addTotal"></span></button></div>
+    </div>
+  </div>
 
   <footer><b>코치포차</b><span>Kochi Po-cha · Direct ordering concept by Salt & Tide Creative</span></footer>
+  <script src="/app.js" type="module"></script>
 </body>
 </html>
