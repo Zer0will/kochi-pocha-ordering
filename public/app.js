@@ -104,8 +104,9 @@ function renderCart(){
 }
 async function submitOrder(e){
   e.preventDefault();
+  const form = e.currentTarget;
   if(!state.cart.length) return;
-  const fd = new FormData(e.currentTarget);
+  const fd = new FormData(form);
   const t = totals();
   $('orderStatus').className = ''; $('orderStatus').textContent = 'Sending order preview…';
   try{
@@ -113,7 +114,7 @@ async function submitOrder(e){
     const data = await res.json();
     if(!res.ok) throw new Error(data.error || 'Order failed');
     $('orderStatus').className = 'success'; $('orderStatus').textContent = `Preview order received: ${data.orderId}. Connect email/SMS/Stripe to make this production.`;
-    state.cart = []; saveCart(); renderCart(); e.currentTarget.reset();
+    state.cart = []; saveCart(); renderCart(); form.reset();
   }catch(err){ $('orderStatus').className = 'error'; $('orderStatus').textContent = err.message || 'Could not send order.'; }
 }
 $('searchInput').addEventListener('input', e => renderMenu(e.target.value));
