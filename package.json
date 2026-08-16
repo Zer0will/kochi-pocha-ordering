@@ -1,0 +1,1 @@
+{"scripts":{"check":"node --check api/order.js && node -e \"JSON.parse(require('fs').readFileSync('public/data/menu.json','utf8')); console.log('menu json ok')\"","build":"npm run check"},"devDependencies":{}}

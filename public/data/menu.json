@@ -1,0 +1,99 @@
+{
+  "business": {
+    "name": "Kochi Po-cha",
+    "koreanName": "코치포차",
+    "tagline": "Late-night Seoul-style pocha in Lynnwood",
+    "address": "18623 Hwy 99 #140, Lynnwood, WA",
+    "hours": "Mon–Sat 5 PM–2 AM · Sun 5 PM–11 PM",
+    "phone": "",
+    "taxRate": 0.1025
+  },
+  "categories": [
+    {"name":"Special Combo","items":[
+      {"name":"Chimac Combo","korean":"치맥 콤보","price":39.99,"description":"Dining-only combo: 1 fried chicken and any 1 pitcher.","badge":"Dining only"}
+    ]},
+    {"name":"Appetizers","items":[
+      {"name":"Corn Cheese","korean":"콘치즈","price":9.99,"description":"Sweet corn baked with melted cheese."},
+      {"name":"Fries","korean":"감자튀김","price":8.99,"description":"Crispy golden fries."},
+      {"name":"Shrimp Tempura","price":13.99,"description":"Lightly battered shrimp tempura."},
+      {"name":"Tako Wasabi","korean":"문어와사비","price":12.99,"description":"Octopus with wasabi."},
+      {"name":"Takoyaki","korean":"타코야끼","price":12.99,"description":"Japanese-style octopus bites."},
+      {"name":"Deep Fried Chicken Gizzard","korean":"닭모래집튀김","price":14.99,"description":"Crispy fried chicken gizzard."},
+      {"name":"Crispy Honey Shrimp","price":15.99,"description":"Crispy shrimp with honey glaze."},
+      {"name":"Kochi Fried Platter","price":19.99,"description":"Assorted fried favorites."},
+      {"name":"Potstickers","korean":"야끼만두","price":8.99,"description":"Pan-fried beef dumplings."}
+    ]},
+    {"name":"Chicken","korean":"치킨","items":[
+      {"name":"Fried Chicken","korean":"후라이드","price":30.99,"description":"Korean-style whole fried chicken.","featured":true},
+      {"name":"Half Whole Chicken","price":17.99,"description":"Half-size portion of fried chicken."},
+      {"name":"Boneless Fried Chicken","korean":"순살치킨","price":26.99,"description":"Boneless Korean fried chicken."},
+      {"name":"Wings","korean":"치킨윙","price":13.99,"description":"Crispy Korean-style wings."}
+    ]},
+    {"name":"Grilled","items":[
+      {"name":"Grilled Squid","korean":"통오징어구이","price":20.99,"description":"Whole grilled squid."},
+      {"name":"Spicy Pork Bulgogi","korean":"돼지 불고기","price":22.99,"description":"Spicy marinated pork."},
+      {"name":"Beef Bulgogi","korean":"소불고기","price":24.99,"description":"Sweet-savory marinated beef."},
+      {"name":"Short Rib","korean":"갈비","price":28.99,"description":"Korean-style beef short rib."},
+      {"name":"Stir-Fried Chicken Gizzard","korean":"닭모래집볶음","price":24.99,"description":"Stir-fried chicken gizzard."},
+      {"name":"Grilled Eel","korean":"장어구이","price":24.99,"description":"Savory grilled eel."},
+      {"name":"Gopchang","korean":"곱창","price":28.99,"description":"Grilled beef intestine."},
+      {"name":"Makchang","korean":"막창","price":32.99,"description":"Grilled intestine."},
+      {"name":"Grilled Mackerel","korean":"고등어구이","price":18.99,"description":"Grilled mackerel."}
+    ]},
+    {"name":"Entrees","items":[
+      {"name":"Bossam","korean":"보쌈","price":30.99,"description":"Steamed pork belly with classic sides.","featured":true},
+      {"name":"Jokbal","korean":"족발","price":28.99,"description":"Korean-style pork feet."},
+      {"name":"Seafood Stir-Fry Udon","price":24.99,"description":"Udon noodles stir-fried with seafood."},
+      {"name":"Creamy Rose Seafood Udon","price":25.99,"description":"Creamy rose sauce seafood udon."},
+      {"name":"Spicy Stir-Fried Rice Cake","korean":"떡볶이","price":16.99,"description":"Chewy rice cakes in spicy sauce."},
+      {"name":"Old School Korean Bento Box","korean":"옛날도시락","price":13.99,"description":"Classic shaken Korean lunchbox."},
+      {"name":"Fried Rice","korean":"볶음밥","price":16.99,"description":"Korean-style fried rice."},
+      {"name":"Cheese Katsu","korean":"치즈카츠","price":24.99,"description":"Crispy cutlet with cheese."},
+      {"name":"Kimchi, Tofu & Pork Belly","korean":"두부김치","price":26.99,"description":"Tofu, kimchi, and pork belly."},
+      {"name":"Chicken Feet","korean":"닭발","price":19.99,"description":"Spicy Korean chicken feet."},
+      {"name":"Seafood Pancake","korean":"해물파전","price":21.99,"description":"Savory seafood pancake."},
+      {"name":"Stir-Fried Squid with Noodle","korean":"오징어볶음소면","price":26.99,"description":"Spicy stir-fried squid with noodles."},
+      {"name":"Rice Ball","price":13.99,"description":"Korean-style rice balls."}
+    ]},
+    {"name":"Soup","items":[
+      {"name":"Fish Cake Soup","korean":"오뎅탕","price":25.99,"description":"Fish cake soup for the table."},
+      {"name":"Tofu Soup","korean":"순두부","price":14.99,"description":"Soft tofu soup."},
+      {"name":"Mussel Soup","korean":"홍합탕","price":18.99,"description":"Mussels in hot broth."},
+      {"name":"Porkneck Mala Stew","price":29.99,"description":"Mala-style pork neck stew."},
+      {"name":"Kimchi Soup","korean":"김치찌개","price":18.99,"description":"Classic kimchi stew."},
+      {"name":"Short-Rib Soup","korean":"갈비탕","price":22.99,"description":"Beef short-rib soup."},
+      {"name":"Spicy Seafood Soup","korean":"짬뽕탕","price":19.99,"description":"Spicy seafood soup."},
+      {"name":"Gamja Tang","korean":"감자탕","price":35.99,"description":"Pork neck bone soup."},
+      {"name":"Army Stew","korean":"부대찌개","price":35.99,"description":"Classic Korean army stew."}
+    ]},
+    {"name":"Dessert","items":[
+      {"name":"Ask About Dessert Specials","price":0,"description":"Dessert availability changes nightly.","badge":"Seasonal"}
+    ]},
+    {"name":"Beverage","korean":"음료수","items":[
+      {"name":"Pepsi","price":3.5,"description":""},
+      {"name":"Diet Pepsi","price":3.5,"description":""},
+      {"name":"Sprite Zero Sugar","price":3.5,"description":""},
+      {"name":"Diet Dr Pepper","price":3.5,"description":""},
+      {"name":"Arizona","price":4,"description":""},
+      {"name":"Sprite","price":3.5,"description":""},
+      {"name":"Dr. Pepper","price":3.5,"description":""},
+      {"name":"Bottle Water","price":3,"description":""},
+      {"name":"7Up","price":3.5,"description":""}
+    ]},
+    {"name":"Extras","korean":"추가","items":[
+      {"name":"Extra Ramen","korean":"라면사리","price":3.99,"description":""},
+      {"name":"Extra Rice","korean":"공기밥","price":2.99,"description":""},
+      {"name":"Extra Udon Noodle","korean":"우동사리","price":3.99,"description":""},
+      {"name":"Extra Sauce","korean":"소스추가","price":1.99,"description":""},
+      {"name":"Extra Cheese","korean":"치즈추가","price":3.99,"description":""},
+      {"name":"Fried Egg","price":2.49,"description":""},
+      {"name":"Extra Beef","price":5.99,"description":""},
+      {"name":"Extra Shrimp","price":5.99,"description":""},
+      {"name":"Kimchi","korean":"김치","price":0.99,"description":""},
+      {"name":"Boiled Egg","price":1.5,"description":""}
+    ]},
+    {"name":"Happy Hour","items":[
+      {"name":"Naked Wings","price":6,"description":"Mon–Wed, 5–9 PM.","badge":"Happy hour"}
+    ]}
+  ]
+}
