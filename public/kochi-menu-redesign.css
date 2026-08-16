@@ -1,0 +1,107 @@
+/* Kochi Po-cha mobile-first redesign layer
+   Direction: preserve the black laminated physical menu language, but upgrade hierarchy/UX.
+   References: Yale liked Luigi's warm restaurant UX + Medina's premium full-screen polish. */
+:root{
+  --kochi-black:#050505;
+  --kochi-panel:#0b0b0b;
+  --kochi-raised:#131313;
+  --kochi-white:#f5f2ea;
+  --kochi-paper:#e8e1d4;
+  --kochi-dim:#9c9a93;
+  --kochi-line:rgba(245,242,234,.28);
+  --kochi-hair:rgba(245,242,234,.13);
+  --kochi-red:#d72b24;
+  --kochi-warm:#b8742b;
+  --kochi-wood:#7b3f15;
+  --kochi-green:#64c981;
+  --menu-font:"Schibsted Grotesk","Noto Sans KR",system-ui,sans-serif;
+  --kr-font:"Noto Sans KR",system-ui,sans-serif;
+}
+
+body{
+  background:
+    radial-gradient(900px 480px at 50% -14%,rgba(184,116,43,.2),transparent 58%),
+    linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 30px),
+    var(--kochi-black);
+  color:var(--kochi-white);
+  font-family:var(--menu-font);
+  letter-spacing:.01em;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+    linear-gradient(120deg,rgba(255,255,255,.05),transparent 18%,transparent 72%,rgba(255,255,255,.035)),
+    radial-gradient(circle at 12% 8%,rgba(255,255,255,.08),transparent 18%);
+  opacity:.55;mix-blend-mode:screen;
+}
+button,input,textarea{font-family:inherit}
+
+.topbar{
+  min-height:68px;background:rgba(5,5,5,.88);border-bottom:1px solid var(--kochi-line);
+  box-shadow:0 14px 30px rgba(0,0,0,.35);backdrop-filter:blur(14px);padding:10px clamp(12px,4vw,34px);
+}
+.brand-lockup{gap:11px}.logo-mark{
+  width:42px;height:42px;border-radius:2px;background:var(--kochi-white);color:var(--kochi-black);
+  box-shadow:none;border:1px solid rgba(255,255,255,.55);font-family:"Black Han Sans",var(--kr-font);font-size:15px;
+}
+.brand-lockup b{
+  font-family:var(--menu-font);font-weight:900;letter-spacing:.13em;font-size:14px;text-transform:uppercase;
+}
+.brand-lockup b::first-letter{color:var(--kochi-red)}
+.brand-lockup small{font-size:11px;color:var(--kochi-dim);letter-spacing:.08em;text-transform:uppercase}
+.nav-links{display:none}.cart-pill{background:transparent;border-color:var(--kochi-line);border-radius:2px;text-transform:uppercase;letter-spacing:.12em;font-size:11px;padding:10px 12px}.cart-pill b{background:var(--kochi-white);color:#050505;border-radius:2px}
+
+.hero{
+  max-width:1040px;grid-template-columns:1fr;gap:18px;padding:30px 14px 18px;min-height:calc(100dvh - 70px);align-content:start;
+}
+.hero-copy{
+  border:1px solid var(--kochi-line);background:
+    linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018)),
+    var(--kochi-panel);
+  border-radius:0;padding:18px 16px 16px;box-shadow:0 22px 60px rgba(0,0,0,.42);position:relative;overflow:hidden;
+}
+.hero-copy:before{
+  content:"KOCHI PO-CHA";display:block;font-weight:900;font-size:clamp(42px,17vw,92px);line-height:.82;letter-spacing:.04em;color:var(--kochi-white);
+  margin-bottom:10px;text-transform:uppercase;
+}
+.hero-copy:after{
+  content:"KOREAN RESTAURANT · TABLE QR ORDERING";position:absolute;right:12px;top:18px;writing-mode:vertical-rl;text-orientation:mixed;font-size:9px;letter-spacing:.22em;color:rgba(245,242,234,.38);font-weight:800;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;width:auto;background:var(--kochi-white);color:var(--kochi-black);border:0;border-radius:0;
+  padding:5px 8px;font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;margin:0 0 12px;font-family:var(--menu-font);
+}
+.hero h1{
+  font-size:clamp(32px,10.5vw,72px);line-height:.94;letter-spacing:-.045em;margin:0;max-width:780px;font-weight:900;text-transform:none;
+}
+.hero h1 span{color:var(--kochi-white);font-style:normal;text-decoration:underline;text-decoration-color:var(--kochi-red);text-decoration-thickness:.12em;text-underline-offset:.08em}
+.lead{font-size:16px;line-height:1.52;color:#d4d0c8;max-width:650px;margin:14px 0 0;font-weight:500;letter-spacing:-.01em}
+.hero-actions{display:grid;grid-template-columns:1fr;gap:10px;margin-top:20px}.btn,.cart-pill{
+  min-height:50px;justify-content:center;border-radius:3px;font-weight:900;letter-spacing:.04em;
+}
+.btn.primary{background:var(--kochi-red);box-shadow:none;color:white}.btn.ghost{background:transparent;border-color:var(--kochi-line);color:var(--kochi-white)}
+.night-card{
+  border-radius:0;border:1px solid var(--kochi-line);background:var(--kochi-panel);padding:14px;box-shadow:0 18px 45px rgba(0,0,0,.35);
+}
+.lantern{height:auto;aspect-ratio:auto;border-radius:0;background:transparent;color:var(--kochi-white);font-size:42px;line-height:.85;letter-spacing:.02em;text-align:left;display:block;box-shadow:none;font-family:"Black Han Sans",var(--kr-font);border-bottom:1px solid var(--kochi-line);padding-bottom:12px;margin-bottom:10px}
+.night-card dl{display:grid;gap:0}.night-card dl>div{border-top:1px solid var(--kochi-hair);padding:11px 0;display:grid;grid-template-columns:86px 1fr;gap:12px}.night-card dt{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--kochi-dim);font-weight:900}.night-card dd{font-size:13px;line-height:1.35;color:var(--kochi-paper);margin:0;font-weight:800}.pulse{background:var(--kochi-green)}
+
+.proof-strip{max-width:1040px;margin:0 auto 8px;padding:0 14px;display:grid;grid-template-columns:1fr;gap:8px}.proof-strip div{border-radius:0;background:var(--kochi-white);color:var(--kochi-black);border:0;padding:13px 12px;display:grid;grid-template-columns:92px 1fr;gap:10px;align-items:center}.proof-strip b{font-size:12px;letter-spacing:.12em;text-transform:uppercase}.proof-strip span{color:#252525;font-size:12px;line-height:1.25;font-weight:700}
+
+.order-layout{max-width:1040px;margin:0 auto;padding:8px 14px 120px;display:block}.category-rail{position:sticky;top:68px;z-index:30;display:flex;gap:7px;overflow:auto;background:rgba(5,5,5,.92);border:1px solid var(--kochi-line);padding:9px;margin-bottom:12px;backdrop-filter:blur(12px);scrollbar-width:none}.cat-btn{flex:0 0 auto;border-radius:2px;border:1px solid var(--kochi-line);background:transparent;color:var(--kochi-paper);padding:10px 12px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:900}.cat-btn.active{background:var(--kochi-white);color:var(--kochi-black);border-color:var(--kochi-white)}
+.menu-column{min-width:0}.menu-head{border:1px solid var(--kochi-line);background:var(--kochi-panel);border-radius:0;padding:14px;margin-bottom:12px;display:grid;gap:13px}.menu-head h2{margin:0;font-size:clamp(34px,11vw,70px);line-height:.88;letter-spacing:-.055em;text-transform:uppercase}.search-box{border-radius:2px;border:1px solid var(--kochi-line);background:#090909;color:var(--kochi-dim);padding:9px 10px;display:grid;gap:7px;font-size:10px;text-transform:uppercase;letter-spacing:.14em;font-weight:900}.search-box input{background:transparent;border:0;color:var(--kochi-white);outline:0;font-size:16px;letter-spacing:0;text-transform:none;font-weight:700;padding:2px 0 0}.search-box input::placeholder{color:rgba(245,242,234,.42)}
+.menu-section{scroll-margin-top:150px;margin-bottom:16px;border:1px solid var(--kochi-line);background:var(--kochi-panel);padding:12px;border-radius:0}.section-title{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--kochi-line);padding-bottom:10px;margin-bottom:8px;gap:12px}.section-title h3{margin:0;display:inline-flex;align-items:center;gap:8px;font-size:15px;letter-spacing:.12em;text-transform:uppercase;font-weight:900}.section-title h3:before{content:"";width:8px;height:8px;background:var(--kochi-red);display:inline-block}.section-title .kr,.kr{font-family:var(--kr-font);letter-spacing:0;color:#d9d5cd;font-weight:700}.section-title span{font-size:11px;color:var(--kochi-dim);font-weight:900;text-transform:uppercase;letter-spacing:.1em}.item-grid{display:grid;grid-template-columns:1fr;gap:0}.menu-card{width:100%;text-align:left;border:0;border-bottom:1px solid var(--kochi-hair);border-radius:0;background:transparent;color:var(--kochi-white);padding:14px 2px 13px;display:grid;grid-template-columns:1fr auto;gap:5px 12px;align-items:start;min-height:0}.menu-card:last-child{border-bottom:0}.menu-card:hover{background:rgba(255,255,255,.035)}.menu-card h4{grid-column:1;margin:0;font-size:17px;line-height:1.12;font-weight:900;letter-spacing:.015em}.menu-card .kr{grid-column:1;font-size:14px;color:var(--kochi-paper);opacity:.85}.menu-card p{grid-column:1;margin:2px 0 0;color:var(--kochi-dim);font-size:12px;line-height:1.3;max-width:36ch}.menu-card footer{grid-column:2;grid-row:1 / span 4;align-self:stretch;display:flex;flex-direction:column;align-items:end;justify-content:space-between;gap:8px}.price{font-size:16px;font-weight:900;color:var(--kochi-white);white-space:nowrap}.add-dot{display:grid;place-items:center;width:34px;height:34px;background:var(--kochi-white);color:var(--kochi-black);border-radius:2px;font-size:20px;font-weight:900}.badge{grid-column:1;width:max-content;background:transparent;color:var(--kochi-red);border:1px solid var(--kochi-red);border-radius:0;padding:3px 6px;font-size:10px;text-transform:uppercase;letter-spacing:.1em;font-weight:900;margin-top:3px}
+
+.cart-panel{position:fixed;inset:0 0 0 auto;width:min(420px,100%);z-index:80;background:var(--kochi-black);border-left:1px solid var(--kochi-line);border-radius:0;transform:translateX(102%);transition:transform .22s ease;box-shadow:-28px 0 80px rgba(0,0,0,.55);padding:14px;overflow:auto}.cart-panel.open{transform:translateX(0)}.cart-head{border-bottom:1px solid var(--kochi-line);padding-bottom:13px}.cart-head h3{font-size:31px;line-height:.9;text-transform:uppercase;letter-spacing:-.04em}.cart-head p{color:var(--kochi-dim);font-size:12px;text-transform:uppercase;letter-spacing:.12em}.cart-head button{background:var(--kochi-white);color:var(--kochi-black);border:0;border-radius:2px}.empty-cart{border:1px dashed var(--kochi-line);border-radius:0;background:rgba(255,255,255,.02);color:var(--kochi-dim);padding:24px 16px}.cart-line{border-bottom:1px solid var(--kochi-hair);padding:13px 0}.cart-line-top h4{font-size:15px;line-height:1.2}.cart-line-top b{font-size:15px}.qty-mini button,.remove{border-radius:2px;border:1px solid var(--kochi-line);background:transparent;color:var(--kochi-white)}.checkout-form{border-top:1px solid var(--kochi-line);margin-top:14px;padding-top:14px}.summary{font-size:14px}.summary.total{font-size:18px;border-top:1px solid var(--kochi-line);padding-top:10px;margin-top:7px}.checkout-form label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--kochi-dim);font-weight:900}.checkout-form input,.checkout-form textarea{border-radius:2px;background:#0c0c0c;border:1px solid var(--kochi-line);color:var(--kochi-white);padding:13px 11px;font-size:16px;text-transform:none;letter-spacing:0}.checkout{border-radius:2px;background:var(--kochi-red);color:white;min-height:54px;text-transform:uppercase;letter-spacing:.08em;font-weight:900}.checkout:disabled{background:#2a2a2a;color:#777}.fine-print{font-size:11px;color:var(--kochi-dim);line-height:1.35}
+.mobile-cart{position:fixed;left:10px;right:10px;bottom:10px;z-index:70;min-height:62px;border-radius:3px;border:2px solid var(--kochi-white);background:var(--kochi-red);color:white;box-shadow:0 18px 50px rgba(0,0,0,.45);padding:0 17px;font-weight:900;text-transform:uppercase;letter-spacing:.06em}.mobile-cart strong{font-size:20px}.mobile-cart span{font-size:12px}
+
+.modal{background:rgba(0,0,0,.72);backdrop-filter:blur(8px)}.modal-card{width:min(520px,calc(100% - 22px));border-radius:0;border:1px solid var(--kochi-line);background:var(--kochi-panel);box-shadow:0 30px 90px rgba(0,0,0,.65);padding:18px}.modal-close{background:var(--kochi-white);color:var(--kochi-black);border:0;border-radius:2px}.modal-card h3{font-size:32px;line-height:.95;letter-spacing:-.04em;margin:8px 0}.modal-card p{color:var(--kochi-dim);line-height:1.42}.modal-price{font-size:24px;font-weight:900;border-top:1px solid var(--kochi-line);border-bottom:1px solid var(--kochi-line);padding:12px 0;margin:12px 0}.modal-card label{font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:var(--kochi-dim);font-weight:900}.modal-card textarea{border-radius:2px;background:#0c0c0c;border:1px solid var(--kochi-line);color:var(--kochi-white)}.qty-row{display:grid;grid-template-columns:44px 44px 44px 1fr;gap:8px}.qty-row button,.qty-row span{border-radius:2px;border:1px solid var(--kochi-line);background:transparent;color:var(--kochi-white);min-height:48px}.qty-row span{display:grid;place-items:center}.qty-row .add-btn{background:var(--kochi-red);border-color:var(--kochi-red);font-weight:900;text-transform:uppercase;letter-spacing:.04em}
+
+.how,.owner-note{max-width:1040px;margin:0 auto 18px;padding:18px 14px;border:1px solid var(--kochi-line);background:var(--kochi-panel);border-radius:0}.how h2,.owner-note h2{font-size:clamp(28px,8vw,56px);line-height:.95;letter-spacing:-.05em;text-transform:uppercase}.steps{grid-template-columns:1fr;gap:8px}.steps article{border-radius:0;background:#090909;border:1px solid var(--kochi-hair);padding:14px}.steps article b{border-radius:2px;background:var(--kochi-white);color:var(--kochi-black)}.steps h3{font-size:18px}.steps p,.owner-note p{color:var(--kochi-dim);line-height:1.45}footer{border-top:1px solid var(--kochi-line);background:#050505;color:var(--kochi-dim)}footer b{color:var(--kochi-white);letter-spacing:.16em;text-transform:uppercase}
+
+@media(min-width:720px){
+  .hero{grid-template-columns:minmax(0,1fr) 330px;padding:54px 24px 28px;min-height:auto}.hero-actions{grid-template-columns:max-content max-content}.proof-strip{grid-template-columns:repeat(3,1fr);padding:0 24px}.proof-strip div{grid-template-columns:1fr}.order-layout{padding:14px 24px 120px}.item-grid{grid-template-columns:repeat(2,1fr);gap:0 18px}.menu-card:nth-last-child(2){border-bottom:0}.how,.owner-note{padding:28px 24px}.steps{display:grid;grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:1040px){
+  .nav-links{display:flex}.order-layout{display:grid;grid-template-columns:220px minmax(0,1fr) 340px;gap:18px;align-items:start}.category-rail{top:92px;display:grid;max-height:calc(100dvh - 120px);overflow:auto;margin-bottom:0}.cart-panel{position:sticky;top:92px;transform:none;width:auto;max-height:calc(100dvh - 110px);box-shadow:none;border:1px solid var(--kochi-line)}.cart-head button{display:none}.mobile-cart{display:none}.hero{padding-top:72px}.menu-head{grid-template-columns:1fr 280px;align-items:end}.item-grid{grid-template-columns:1fr}.menu-card:nth-last-child(2){border-bottom:1px solid var(--kochi-hair)}
+}
