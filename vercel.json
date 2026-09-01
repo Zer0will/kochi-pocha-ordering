@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "rewrites": [
     {"source": "/order", "destination": "/order.html"},
-    {"source": "/table/:id", "destination": "/order.html"}
+    {"source": "/table/:path*", "destination": "/order.html"}
   ],
   "headers": [
     {
