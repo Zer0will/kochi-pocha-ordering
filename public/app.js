@@ -2,6 +2,13 @@ const state = { menu: null, selected: null, qty: 1, cart: JSON.parse(localStorag
 const $ = (id) => document.getElementById(id);
 const money = (n) => `$${Number(n || 0).toFixed(2)}`;
 const slug = (s) => `cat-${s.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '-')}`;
+const CATEGORY_KR = {
+  'Special Combo': '콤보', Appetizers: '안주', Chicken: '치킨', Grilled: '구이',
+  Entrees: '식사', Soup: '탕', Dessert: '후식', Beverage: '음료', Extras: '추가',
+  'Happy Hour': '해피'
+};
+const shortEn = (name) => name.replace('Special Combo', 'COMBO').replace('Appetizers', 'APPETIZER').replace('Beverage', 'DRINKS').replace('Happy Hour', 'HAPPY');
+const categoryKr = (category) => category.korean || CATEGORY_KR[category.name] || category.name.slice(0, 2);
 
 async function loadMenu(){
   const res = await fetch('/data/menu.json');
@@ -22,25 +29,27 @@ function renderMenu(filter=''){
     sections++;
     const btn = document.createElement('button');
     btn.className = `cat-btn ${index === 0 && !q ? 'active' : ''}`;
-    btn.type = 'button'; btn.textContent = category.korean ? `${category.name} · ${category.korean}` : category.name;
+    btn.type = 'button';
+    btn.dataset.cat = category.name;
+    btn.innerHTML = `<span class="cat-kr">${categoryKr(category)}</span><span class="cat-en">${shortEn(category.name)}</span>`;
     btn.onclick = () => document.getElementById(slug(category.name)).scrollIntoView({behavior:'smooth', block:'start'});
     $('categoryRail').appendChild(btn);
 
     const sec = document.createElement('section');
     sec.className = 'menu-section'; sec.id = slug(category.name);
-    sec.innerHTML = `<div class="section-title"><h3>${category.name}${category.korean ? ` <span class="kr">${category.korean}</span>` : ''}</h3><span>${matches.length} items</span></div><div class="item-grid"></div>`;
+    sec.innerHTML = `<div class="section-title"><h3>${shortEn(category.name)}</h3><span class="kr">${categoryKr(category)}</span><span>${matches.length} items</span></div><div class="item-grid"></div>`;
     const grid = sec.querySelector('.item-grid');
     matches.forEach(item => {
       const card = document.createElement('button');
       card.type = 'button'; card.className = 'menu-card';
       const price = item.price > 0 ? money(item.price) : 'Ask';
-      card.innerHTML = `<h4>${item.name}</h4>${item.korean ? `<div class="kr">${item.korean}</div>` : ''}${item.badge ? `<span class="badge">${item.badge}</span>` : ''}<p>${item.description || 'Available for pickup.'}</p><footer><span class="price">${price}</span><span class="add-dot">+</span></footer>`;
+      card.innerHTML = `<div class="menu-art"><span class="art-kr">${item.korean || categoryKr(category)}</span>${item.badge ? `<span class="badge">${item.badge}</span>` : ''}</div><div class="menu-card-body"><h4>${item.name}</h4><p>${item.description || 'Available for pickup.'}</p><footer><span class="price">${price}</span><span class="add-dot">+</span></footer></div>`;
       card.onclick = () => openItem(category.name, item);
       grid.appendChild(card);
     });
     $('menuContent').appendChild(sec);
   });
-  if(!sections) $('menuContent').innerHTML = `<div class="empty-cart">No matching menu items.</div>`;
+  if(!sections) $('menuContent').innerHTML = `<div class="empty-cart">No matching menu items.<br><span>다시 검색해보세요.</span></div>`;
   observeSections();
 }
 
@@ -51,7 +60,7 @@ function observeSections(){
     const visible = entries.filter(e => e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
     if(!visible) return;
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    const btn = [...document.querySelectorAll('.cat-btn')].find(b => slug(b.textContent.split(' · ')[0]) === visible.target.id);
+    const btn = [...document.querySelectorAll('.cat-btn')].find(b => slug(b.dataset.cat || '') === visible.target.id);
     if(btn) btn.classList.add('active');
   }, {rootMargin:'-140px 0px -58% 0px', threshold:[0,.2,.5]});
   document.querySelectorAll('.menu-section').forEach(s => observer.observe(s));
@@ -100,6 +109,8 @@ function renderCart(){
   const t = totals();
   $('subtotal').textContent = money(t.subtotal); $('tax').textContent = money(t.tax); $('total').textContent = money(t.total);
   $('cartCount').textContent = t.count; $('mobileCount').textContent = t.count; $('mobileTotal').textContent = money(t.total);
+  $('mobileCartBtn').classList.toggle('has-items', t.count > 0);
+  $('mobileCartBtn').setAttribute('aria-hidden', t.count > 0 ? 'false' : 'true');
   $('checkoutBtn').disabled = !state.cart.length;
 }
 async function submitOrder(e){
