@@ -1,19 +1,20 @@
+const $ = (id) => document.getElementById(id);
+const money = (n) => `$${Number(n || 0).toFixed(2)}`;
+const slug = (s) => `cat-${s.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '-')}`;
+const CATEGORY_KR = {'Special Combo':'콤보', Appetizers:'안주', Chicken:'치킨', Grilled:'구이', Entrees:'식사', Soup:'탕', Dessert:'후식', Beverage:'음료', Extras:'추가', 'Happy Hour':'해피'};
+const tableId = decodeURIComponent(location.pathname.match(/\/table\/([^/?#]+)/)?.[1] || new URLSearchParams(location.search).get('table') || '7');
+const storageKey = (name) => `kochi_${tableId}_${name}`;
+
 const state = {
   menu: null,
   selected: null,
   qty: 1,
   activeGuest: 'J',
   splitMode: 'even',
-  round: Number(localStorage.getItem('kochi_round') || '1'),
-  cart: JSON.parse(localStorage.getItem('kochi_cart') || '[]'),
-  sentRounds: JSON.parse(localStorage.getItem('kochi_sent_rounds') || '[]')
+  round: Number(localStorage.getItem(storageKey('round')) || '1'),
+  cart: JSON.parse(localStorage.getItem(storageKey('cart')) || '[]'),
+  sentRounds: JSON.parse(localStorage.getItem(storageKey('sent_rounds')) || '[]')
 };
-
-const $ = (id) => document.getElementById(id);
-const money = (n) => `$${Number(n || 0).toFixed(2)}`;
-const slug = (s) => `cat-${s.toLowerCase().replace(/[^a-z0-9가-힣]+/g, '-')}`;
-const CATEGORY_KR = {'Special Combo':'콤보', Appetizers:'안주', Chicken:'치킨', Grilled:'구이', Entrees:'식사', Soup:'탕', Dessert:'후식', Beverage:'음료', Extras:'추가', 'Happy Hour':'해피'};
-const tableId = decodeURIComponent(location.pathname.match(/\/table\/([^/?#]+)/)?.[1] || new URLSearchParams(location.search).get('table') || '7');
 const categoryKr = (category) => category.korean || CATEGORY_KR[category.name] || category.name.slice(0, 2);
 const shortEn = (name) => name.replace('Special Combo', 'COMBO').replace('Appetizers', 'APPETIZER').replace('Beverage', 'DRINKS').replace('Happy Hour', 'HAPPY');
 
@@ -104,8 +105,8 @@ function updateModalTotal(){
   $('qtyValue').textContent = state.qty;
   $('addTotal').textContent = money(state.selected.item.price * state.qty);
 }
-function saveCart(){ localStorage.setItem('kochi_cart', JSON.stringify(state.cart)); }
-function saveRounds(){ localStorage.setItem('kochi_sent_rounds', JSON.stringify(state.sentRounds)); localStorage.setItem('kochi_round', String(state.round)); }
+function saveCart(){ localStorage.setItem(storageKey('cart'), JSON.stringify(state.cart)); }
+function saveRounds(){ localStorage.setItem(storageKey('sent_rounds'), JSON.stringify(state.sentRounds)); localStorage.setItem(storageKey('round'), String(state.round)); }
 function addSelected(){
   const note = $('itemNotes').value.trim();
   const guest = $('itemGuest').value;
