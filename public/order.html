@@ -3,128 +3,135 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#0d0c0f" />
+  <meta name="theme-color" content="#09080b" />
   <title>Table QR Ordering | Kochi Po-cha 코치포차</title>
-  <meta name="description" content="Kochi Po-cha table QR ordering concept: a bilingual, restaurant-owned Korean pocha menu with shared table cart and direct checkout path." />
+  <meta name="description" content="Kochi Po-cha table QR ordering prototype with category rail, bottom-sheet item details, shared table cart, send-round, split bill, custom split, and paid confirmation states." />
   <link rel="canonical" href="https://kochi-pocha-ordering.vercel.app/order" />
   <meta property="og:title" content="Kochi Po-cha 코치포차 | Table QR Ordering" />
-  <meta property="og:description" content="A Korean-owned table QR ordering preview for Kochi Po-cha in Lynnwood." />
+  <meta property="og:description" content="A Korean-owned dine-in QR ordering preview for Kochi Po-cha in Lynnwood." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;600;800;900&family=Schibsted+Grotesk:wght@400;500;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/kochi-menu-redesign.css" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Restaurant","name":"Kochi Po-cha","alternateName":"코치포차","servesCuisine":["Korean","Pocha","Late-night"],"address":{"@type":"PostalAddress","streetAddress":"18623 Hwy 99 #140","addressLocality":"Lynnwood","addressRegion":"WA","addressCountry":"US"},"url":"https://kochi-pocha-ordering.vercel.app/","acceptsReservations":false}
   </script>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand-lockup" href="/" aria-label="Kochi Po-cha home">
-      <span class="logo-mark">코치</span>
-      <span><b>코치</b><small>Table 7 · Korean pocha QR menu</small></span>
-    </a>
-    <nav class="nav-links" aria-label="Primary navigation">
-      <a href="/">Home</a>
-      <a href="#menu">Menu</a>
-      <a href="#how">How table QR works</a>
-    </nav>
-    <button class="cart-pill" id="cartTop" type="button">Cart <b id="cartCount">0</b></button>
-  </header>
+  <main class="phone-shell" id="app" aria-label="Kochi Po-cha table ordering app">
+    <section class="phone-screen">
+      <header class="statusbar" aria-hidden="true"><b>11:47</b><span></span><i>5G</i></header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">코치포차 · Korean restaurant</p>
-        <h1>Late-night Korean pocha, ordered from your table.</h1>
-        <p class="lead">Scan the QR, browse Kochi’s bilingual menu, add fried chicken, bossam, soups, grilled plates, and drinks to your cart, then pay online or at the counter.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#menu">See the menu</a>
-          <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Kochi%20Po-cha%2018623%20Hwy%2099%20%23140%20Lynnwood%20WA" target="_blank" rel="noreferrer">Get directions</a>
+      <section class="hero-card" aria-label="Table status">
+        <div>
+          <p class="eyebrow">코치포차 · Dine-in QR</p>
+          <h1>Table <span id="tableNumber">7</span></h1>
+          <p class="subcopy">Order rounds together. Close out when the table is ready.</p>
         </div>
-      </div>
-      <aside class="night-card">
-        <div class="lantern">포차</div>
-        <dl>
-          <div><dt>Hours</dt><dd>Mon–Sat 5 PM–2 AM<br>Sun 5 PM–11 PM</dd></div>
-          <div><dt>Pickup</dt><dd>18623 Hwy 99 #140 · Lynnwood</dd></div>
-          <div><dt>Status</dt><dd><span class="pulse"></span>Pickup ordering preview</dd></div>
-        </dl>
-      </aside>
-    </section>
-
-    <section class="proof-strip" aria-label="Ordering benefits">
-      <div><b>QR-first</b><span>Matches the real table flow: scan, cart, order, pay online or at counter</span></div>
-      <div><b>Fee audit</b><span>Compare current QR provider fees against Stripe/pay-at-counter economics</span></div>
-      <div><b>Owner-owned</b><span>Menu, customer data, and order routing stay under Kochi control</span></div>
-    </section>
-
-    <section class="order-layout" id="menu">
-      <aside class="category-rail" id="categoryRail" aria-label="Menu categories"></aside>
-      <section class="menu-column">
-        <div class="menu-head">
-          <div>
-                <p class="eyebrow">Table 7 · 4 seated</p>
-            <h2>Order together</h2>
-          </div>
-          <label class="search-box">Search <input id="searchInput" type="search" placeholder="chicken, soup, bossam…" /></label>
-        </div>
-        <div id="menuContent"></div>
+        <button class="ghost-chip" id="openBillTop" type="button">Split</button>
       </section>
-      <aside class="cart-panel" id="cartPanel" aria-label="Cart">
-        <div class="cart-head"><div><h3>Table cart</h3><p>Table 7 · one bill · round 1</p></div><button id="closeCart" type="button" aria-label="Close cart">×</button></div>
-        <div id="cartItems" class="cart-items"></div>
-        <div id="emptyCart" class="empty-cart">Cart is empty.<br><span>맛있는 걸 골라보세요.</span></div>
-        <form class="checkout-form" id="checkoutForm">
-          <div class="summary"><span>Subtotal</span><b id="subtotal">$0.00</b></div>
-          <div class="summary"><span>Estimated tax</span><b id="tax">$0.00</b></div>
-          <div class="summary total"><span>Total</span><b id="total">$0.00</b></div>
-          <label>Name<input name="customerName" autocomplete="name" required placeholder="Your name" /></label>
-          <label>Phone<input name="customerPhone" autocomplete="tel" required placeholder="For pickup updates" /></label>
-          <label>Table note<textarea name="pickupNote" placeholder="Allergies, sauce on side, bring with round 2…"></textarea></label>
-          <button class="checkout" id="checkoutBtn" type="submit" disabled>Send round to kitchen</button>
-          <p class="fine-print">Preview mode: validates through the Vercel API only. Real kitchen/POS/payment routing still needs owner approval and credentials.</p>
-          <div id="orderStatus" role="status" aria-live="polite"></div>
-        </form>
-      </aside>
+
+      <nav class="party-strip" aria-label="Guests at this table">
+        <button class="guest-pill active" data-guest="J" type="button">J</button>
+        <button class="guest-pill" data-guest="S" type="button">S</button>
+        <button class="guest-pill" data-guest="M" type="button">M</button>
+        <button class="guest-pill" data-guest="Y" type="button">Y</button>
+        <span>4 seated · Round <b id="roundNumber">1</b></span>
+      </nav>
+
+      <label class="search-box" aria-label="Search menu">
+        <span>Search menu</span>
+        <input id="searchInput" type="search" placeholder="chicken, soup, bossam…" autocomplete="off" />
+      </label>
+
+      <section class="content-grid">
+        <aside class="category-rail" id="categoryRail" aria-label="Menu categories"></aside>
+        <section class="menu-scroll" id="menuContent" aria-label="Menu items"></section>
+      </section>
     </section>
 
-    <section class="how" id="how">
-      <p class="eyebrow">Current flow, rebuilt cleaner</p>
-      <h2>How this fits the QR ordering Kochi already uses</h2>
-      <div class="steps">
-        <article><b>1</b><h3>Customer scans the table QR</h3><p>The real flow starts at the table: scan the receipt QR, open Kochi's web menu, add items to cart, and send the order.</p></article>
-        <article><b>2</b><h3>Order routes to the restaurant</h3><p>A better version should preserve the existing convenience while making fees, customer data, and order routing more owner-controlled.</p></article>
-        <article><b>3</b><h3>Payment stays flexible</h3><p>Support the same behavior customers expect: pay online when enabled, or pay at the counter when the restaurant wants a simpler operational path.</p></article>
-      </div>
-    </section>
-
-    <section class="owner-note" id="owner-note">
-      <div>
-        <p class="eyebrow">Owner pitch</p>
-        <h2>Keep the QR convenience — improve the economics and control.</h2>
-        <p>The current QR ordering flow is real and useful. The sales question is whether Kochi can keep that same scan → cart → order → pay experience while reducing provider dependence, improving menu control, and owning more customer/order data.</p>
-      </div>
-      <a class="btn primary" href="/docs/ordering-options.html">View ordering options</a>
-    </section>
+    <button class="floating-cart" id="mobileCartBtn" type="button" aria-hidden="true">
+      <span class="bag-count" id="mobileCount">0</span>
+      <span><b>Table cart</b><small id="cartSubtitle">Ready when everyone's in</small></span>
+      <strong id="mobileTotal">$0.00</strong>
+    </button>
   </main>
 
-  <button class="mobile-cart" id="mobileCartBtn" type="button"><span><b id="mobileCount">0</b> items</span><strong id="mobileTotal">$0.00</strong></button>
+  <aside class="drawer" id="cartPanel" aria-hidden="true" aria-label="Live table cart">
+    <div class="drawer-card">
+      <header class="drawer-head">
+        <div><p class="eyebrow">Live table cart</p><h2>Table <span data-table-label>7</span> · Round <span data-round-label>1</span></h2></div>
+        <button class="icon-btn" id="closeCart" type="button" aria-label="Close cart">×</button>
+      </header>
+      <div id="sentRounds" class="sent-rounds" hidden></div>
+      <div id="cartItems" class="cart-items"></div>
+      <div id="emptyCart" class="empty-state">Cart is empty.<br><span>맛있는 걸 골라보세요.</span></div>
+      <form class="send-round" id="checkoutForm">
+        <label>Server/table name<input name="customerName" autocomplete="name" required value="Table 7" /></label>
+        <label class="phone-field">Phone for receipt<input name="customerPhone" autocomplete="tel" required value="555-0107" /></label>
+        <label>Round note<textarea name="pickupNote" placeholder="Allergies, sauce on side, bring with round 2…"></textarea></label>
+        <div class="summary"><span>Subtotal</span><b id="subtotal">$0.00</b></div>
+        <div class="summary"><span>Estimated tax</span><b id="tax">$0.00</b></div>
+        <div class="summary total"><span>Table total</span><b id="total">$0.00</b></div>
+        <button class="primary-action" id="checkoutBtn" type="submit" disabled>Send round to kitchen</button>
+        <button class="secondary-action" id="openBill" type="button">Close out / split bill</button>
+        <p class="fine-print">Preview mode: order validation hits the Vercel API. Kitchen/POS/Stripe wiring still needs owner credentials.</p>
+        <div id="orderStatus" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </aside>
 
-  <div class="modal" id="itemModal" aria-hidden="true">
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalName">
-      <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
+  <section class="sheet" id="itemModal" aria-hidden="true">
+    <article class="sheet-card" role="dialog" aria-modal="true" aria-labelledby="modalName">
+      <button class="icon-btn modal-x" id="modalClose" type="button" aria-label="Close">×</button>
+      <div class="food-poster"><span id="modalKorean">포차</span></div>
       <p class="eyebrow" id="modalCategory"></p>
-      <h3 id="modalName"></h3>
+      <h2 id="modalName"></h2>
       <p id="modalDesc"></p>
       <div class="modal-price" id="modalPrice"></div>
+      <label>Who is this for?<select id="itemGuest"><option>Shared table</option><option>J</option><option>S</option><option>M</option><option>Y</option></select></label>
       <label>Special instructions<textarea id="itemNotes" placeholder="No onions, extra sauce, allergies…"></textarea></label>
-      <div class="qty-row"><button id="qtyMinus" type="button">−</button><span id="qtyValue">1</span><button id="qtyPlus" type="button">+</button><button class="add-btn" id="addToCart" type="button">Add · <span id="addTotal"></span></button></div>
-    </div>
-  </div>
+      <footer class="qty-row"><button id="qtyMinus" type="button">−</button><span id="qtyValue">1</span><button id="qtyPlus" type="button">+</button><button class="add-btn" id="addToCart" type="button">Add · <span id="addTotal"></span></button></footer>
+    </article>
+  </section>
 
-  <footer><b>코치포차</b><span>Kochi Po-cha · Direct ordering concept by Salt & Tide Creative</span></footer>
+  <section class="sheet" id="billSheet" aria-hidden="true">
+    <article class="sheet-card bill-card" role="dialog" aria-modal="true" aria-labelledby="billTitle">
+      <button class="icon-btn modal-x" id="billClose" type="button" aria-label="Close bill">×</button>
+      <p class="eyebrow">Close out</p>
+      <h2 id="billTitle">Split the table bill</h2>
+      <div class="bill-tabs" role="tablist" aria-label="Split options">
+        <button class="active" data-split="even" type="button">Even</button>
+        <button data-split="seat" type="button">By seat</button>
+        <button data-split="custom" type="button">Custom</button>
+      </div>
+      <div class="bill-total"><span>Total due</span><b id="billTotal">$0.00</b></div>
+      <div id="splitContent"></div>
+      <div class="keypad" id="customKeypad" hidden>
+        <input id="customAmount" inputmode="decimal" aria-label="Custom payment amount" placeholder="$0.00" readonly />
+        <div class="keys">
+          <button type="button">1</button><button type="button">2</button><button type="button">3</button>
+          <button type="button">4</button><button type="button">5</button><button type="button">6</button>
+          <button type="button">7</button><button type="button">8</button><button type="button">9</button>
+          <button type="button">.</button><button type="button">0</button><button type="button">⌫</button>
+        </div>
+      </div>
+      <button class="primary-action" id="payNow" type="button">Mark paid in preview</button>
+      <p class="fine-print">This screen models Stripe/Toast/Square handoff behavior only — no real charge is created.</p>
+    </article>
+  </section>
+
+  <section class="paid-state" id="paidState" aria-hidden="true">
+    <article>
+      <div class="checkmark">✓</div>
+      <p class="eyebrow">Paid confirmation</p>
+      <h2>Table <span data-table-label>7</span> is closed out.</h2>
+      <p id="paidSummary">Receipt sent. 감사합니다.</p>
+      <button class="primary-action" id="newRound" type="button">Start another round</button>
+    </article>
+  </section>
+
   <script src="/app.js" type="module"></script>
 </body>
 </html>
